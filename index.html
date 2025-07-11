@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Interaktif STECU - Gratifikasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .option-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .correct-answer {
+            background-color: #10B981 !important; /* Green-500 */
+            color: white !important;
+            border-color: #059669 !important;
+        }
+        .wrong-answer {
+            background-color: #EF4444 !important; /* Red-500 */
+            color: white !important;
+            border-color: #DC2626 !important;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 p-4"> <div class="w-full max-w-sm mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 relative overflow-hidden">
+        <div class="relative z-10">
+            <div class="text-center mb-4">
+                <h1 class="text-7xl font-black text-gray-800 dark:text-white flex items-center justify-center">
+                    ST<span class="text-yellow-500 dark:text-yellow-400 -mx-1">9</span>CU
+                </h1>
+                <p class="font-semibold text-blue-600 dark:text-blue-400">Kuis Hari Ini</p>
+            </div>
+<div class="bg-blue-50 dark:bg-blue-950 border-l-4 border-blue-500 p-4 mb-6 rounded-md">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-blue-200">Informasi Penting</h3>
+                        <p class="text-gray-700 dark:text-blue-100 text-sm">Seluruh jawaban kuis akan dikumpulkan menjadi dasar pembuatan Sertifikat Kompetensi SDM setiap akhir bulan.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="main-content"> 
+                <div id="start-section" class="mt-8 text-center flex flex-col items-center">
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">waktunya ST9CU , sdm tiap hari, eksis dengan content Update, daftar dulu yuk!</p>
+                    
+                    <div class="w-full max-w-xs mx-auto mb-6 space-y-4">
+                        <div>
+                            <label for="namaLengkap" class="block text-left text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nama Lengkap</label>
+                            <input type="text" id="namaLengkap" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Masukkan nama lengkap Anda" required>
+                        </div>
+                        <div>
+                            <label for="nip" class="block text-left text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">NIP</label>
+                            <input type="text" id="nip" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Masukkan NIP Anda" required>
+                        </div>
+                        <div>
+                            <label for="satker" class="block text-left text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Satker/Tim Kerja/Unit Kerja</label>
+                            <input type="text" id="satker" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Masukkan satker/tim kerja Anda" required>
+                        </div>
+                    </div>
+
+                    <button id="start-quiz-btn" class="bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform transition-all hover:scale-105 duration-300 inline-flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                        </svg>
+                        <span>Mulai Kuis</span>
+                    </button>
+                </div>
+
+                <div id="quiz-container" class="hidden text-left fade-in">
+                    <div id="progress-bar" class="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
+                      <div id="progress-indicator" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <p id="progress-text" class="text-sm text-center text-gray-500 mb-2"></p>
+                    <p id="question-text" class="font-semibold text-gray-800 dark:text-white mb-4"></p>
+                    <div id="options-container" class="space-y-2"></div>
+                    <div id="feedback-container" class="hidden mt-4 p-3 rounded-lg text-sm"></div>
+                    <button id="next-btn" class="hidden w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                        Lanjut
+                    </button>
+                </div>
+                
+                <div id="finish-screen" class="hidden text-center fade-in flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="text-green-500 mb-4" viewBox="0 0 16 16">
+                        <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
+                        <path d="M1.882 12.785A4.486 4.486 0 0 0 5.09 15.618a4.486 4.486 0 0 0 5.82 0a4.486 4.486 0 0 0 3.208-2.833a.25.25 0 0 0-.48-.098a4.002 4.002 0 0 1-7.598 0a.25.25 0 0 0-.48.098zM11.666 4.892a.25.25 0 0 0-.41-.295A3.483 3.483 0 0 1 8 5.5a3.483 3.483 0 0 1-3.256-.897a.25.25 0 0 0-.41.295A4.001 4.001 0 0 0 8 6.5a4 4 0 0 0 3.666-1.608z"/>
+                        <path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 1 0 0 13a6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                    </svg>
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Kuis Selesai!</h2>
+                    <p class="mt-2 text-gray-600 dark:text-gray-300">Terima kasih telah berpartisipasi. Terus tingkatkan integritas dan sampai jumpa di STECU berikutnya!</p>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbziR8_DgFZ2GKC9yUfmN6OY7vLMD69qBFm1jePkig3_W95UngFqUhgK_g5nTojSidmg/exec'; // Ganti dengan URL web app Apps Script Anda
+        const SHEET_POST_URL = 'https://script.google.com/macros/s/AKfycbziR8_DgFZ2GKC9yUfmN6OY7vLMD69qBFm1jePkig3_W95UngFqUhgK_g5nTojSidmg/exec'; // Ganti dengan URL web app Apps Script Anda (SAMA DENGAN APP_SCRIPT_URL JIKA MENGGUNAKAN DOPOST YANG SAMA)
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const startSection = document.getElementById('start-section');
+            const startQuizBtn = document.getElementById('start-quiz-btn');
+            const quizContainer = document.getElementById('quiz-container');
+            const finishScreen = document.getElementById('finish-screen');
+            const restartQuizBtn = document.getElementById('restart-quiz-btn');
+            
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const nextBtn = document.getElementById('next-btn');
+
+            const progressBar = document.getElementById('progress-indicator');
+            const progressText = document.getElementById('progress-text');
+
+            // Input fields
+            const namaLengkapInput = document.getElementById('namaLengkap');
+            const nipInput = document.getElementById('nip');
+            const satkerInput = document.getElementById('satker');
+
+            let quizData = []; // Ini akan diisi dari Apps Script
+            let currentQuestionIndex = 0;
+            let correctAnswersCount = 0; // Menghitung jawaban benar
+            let userAnswers = []; // Menyimpan jawaban pengguna
+
+            // Variables to store user info
+            let userName = '';
+            let userNIP = '';
+            let userSatker = '';
+
+            async function fetchQuizData() {
+                try {
+                    const response = await fetch(APP_SCRIPT_URL);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    if (data && data.length > 0) {
+                        quizData = data;
+                        console.log("Quiz Data loaded:", quizData);
+                        return true;
+                    } else {
+                        console.error("No quiz data received from Apps Script.");
+                        alert("Tidak dapat memuat soal kuis. Silakan coba lagi nanti.");
+                        return false;
+                    }
+                } catch (error) {
+                    console.error("Error fetching quiz data:", error);
+                    alert("Terjadi kesalahan saat memuat soal kuis. Cek koneksi Anda atau hubungi administrator.");
+                    return false;
+                }
+            }
+
+            async function startQuiz() {
+                // Get user info from inputs
+                userName = namaLengkapInput.value.trim();
+                userNIP = nipInput.value.trim();
+                userSatker = satkerInput.value.trim();
+
+                // Validate inputs
+                if (!userName || !userNIP || !userSatker) {
+                    alert("Mohon lengkapi semua data diri (Nama Lengkap, NIP, dan Satker) sebelum memulai kuis.");
+                    return;
+                }
+
+                // Reset quiz state for restart
+                quizData = [];
+                currentQuestionIndex = 0;
+                correctAnswersCount = 0;
+                userAnswers = [];
+
+                // Show loading indicator
+                startQuizBtn.disabled = true;
+                startQuizBtn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Memuat...';
+
+                const success = await fetchQuizData();
+                startQuizBtn.disabled = false;
+                startQuizBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/></svg> <span>Mulai Kuis</span>';
+
+                if (success) {
+                    startSection.classList.add('hidden');
+                    finishScreen.classList.add('hidden');
+                    quizContainer.classList.remove('hidden');
+                    nextBtn.classList.add('hidden');
+                    displayQuestion();
+                }
+            }
+
+            function displayQuestion() {
+                feedbackContainer.classList.add('hidden');
+                nextBtn.classList.add('hidden');
+                
+                if (quizData.length === 0) {
+                    console.error("Quiz data is empty. Cannot display question.");
+                    return;
+                }
+
+                const questionData = quizData[currentQuestionIndex];
+                questionText.textContent = questionData.question;
+                optionsContainer.innerHTML = '';
+
+                // Update Progress
+                const progress = ((currentQuestionIndex + 1) / quizData.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `Pertanyaan ${currentQuestionIndex + 1} dari ${quizData.length}`;
+
+                Object.entries(questionData.options).forEach(([key, value]) => {
+                    const button = document.createElement('button');
+                    button.className = 'option-btn w-full text-left p-3 bg-gray-100 dark:bg-gray-700 rounded-lg border-2 border-transparent hover:bg-gray-200 dark:hover:bg-gray-600';
+                    button.innerHTML = `<span class="font-bold">${key}.</span> ${value}`;
+                    button.dataset.key = key;
+                    button.addEventListener('click', checkAnswer);
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function checkAnswer(event) {
+                const selectedButton = event.currentTarget;
+                const selectedKey = selectedButton.dataset.key;
+                const questionData = quizData[currentQuestionIndex];
+
+                // Store user's answer
+                userAnswers[currentQuestionIndex] = selectedKey;
+
+                const allOptionButtons = optionsContainer.querySelectorAll('.option-btn');
+                allOptionButtons.forEach(btn => {
+                    btn.disabled = true;
+                    if (btn.dataset.key === questionData.correctAnswer) {
+                        btn.classList.add('correct-answer');
+                    }
+                });
+
+                if (selectedKey === questionData.correctAnswer) {
+                    correctAnswersCount++; // Increment correct answer count
+                    feedbackContainer.className = 'block mt-4 p-3 rounded-lg text-sm bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200 fade-in';
+                    feedbackContainer.innerHTML = `<p class="font-bold">Benar!</p><p>${questionData.explanation}</p>`;
+                } else {
+                    selectedButton.classList.add('wrong-answer');
+                    feedbackContainer.className = 'block mt-4 p-3 rounded-lg text-sm bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-200 fade-in';
+                    feedbackContainer.innerHTML = `<p class="font-bold">Kurang Tepat.</p><p>${questionData.explanation}</p>`;
+                }
+                
+                if (currentQuestionIndex < quizData.length - 1) {
+                    nextBtn.textContent = 'Lanjut';
+                } else {
+                    nextBtn.textContent = 'Selesai';
+                }
+                nextBtn.classList.remove('hidden');
+            }
+
+            async function handleNext() {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizData.length) {
+                    displayQuestion();
+                } else {
+                    quizContainer.classList.add('hidden');
+                    // Display final score on finish screen (optional)
+                    const finishMessage = finishScreen.querySelector('p.mt-2'); // Select the message paragraph
+                    finishMessage.textContent = `Anda berhasil menjawab ${correctAnswersCount} dari ${quizData.length} pertanyaan dengan benar. Terima kasih telah berpartisipasi. Terus tingkatkan integritas dan sampai jumpa di STECU berikutnya!`;
+                    finishScreen.classList.remove('hidden');
+                    
+                    // Send quiz results to Google Sheet
+                    await sendQuizResultsToSheet();
+                }
+            }
+
+            async function sendQuizResultsToSheet() {
+                const totalQuestions = quizData.length;
+                const scorePercentage = (correctAnswersCount / totalQuestions) * 100;
+                const formattedUserAnswers = JSON.stringify(userAnswers); // Convert array to string for storage
+
+                const formData = new FormData();
+                formData.append('nama', userName);
+                formData.append('nip', userNIP); // Add NIP
+                formData.append('satker', userSatker); // Add Satker
+                formData.append('jawabanKuis', formattedUserAnswers);
+                formData.append('hasilKuis', `${correctAnswersCount}/${totalQuestions} (${scorePercentage.toFixed(2)}%)`);
+
+                try {
+                    const response = await fetch(SHEET_POST_URL, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const result = await response.json();
+                    if (result.result === 'success') {
+                        console.log("Quiz results sent successfully:", result.message);
+                    } else {
+                        console.error("Failed to send quiz results:", result.message);
+                        alert("Gagal menyimpan hasil kuis. Silakan coba lagi atau hubungi administrator.");
+                    }
+                } catch (error) {
+                        console.error("Error sending quiz results:", error);
+                        alert("Terjadi kesalahan jaringan saat menyimpan hasil kuis.");
+                }
+            }
+            
+            startQuizBtn.addEventListener('click', startQuiz);
+            nextBtn.addEventListener('click', handleNext);
+            restartQuizBtn.addEventListener('click', startQuiz);
+        });
+    </script>
+
+</body>
+</html>
